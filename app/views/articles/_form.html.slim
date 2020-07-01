@@ -1,0 +1,15 @@
+= form_with model: @article do |f|
+  #article_wrap
+    p
+      = f.label :title, 'タイトル'
+      br
+      = f.text_field :title
+    br
+    p
+      = f.label :content, '記事内容'
+      br
+      = f.text_area :content
+    br
+    p
+      = f.submit
+    br

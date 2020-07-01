@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title
+      | Rails Camp Blog
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    - # <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+  body
+    - if flash[:danger]
+      .alert
+        p
+          = flash[:danger]
+    header
+      = link_to root_path, id: "logo" do
+        p
+          | RailsCamp
+          span
+            | Blog
+      nav
+        - # navはそのセクションが主要なナビゲーションであることを示すタグ
+        ul
+          - if user_signed_in?
+            li
+              = link_to "トップ", root_path
+            li
+              = link_to "新規投稿", new_article_path
+            li
+              = link_to "ログアウト", destroy_user_session_path, method: :delete
+          - else
+            li
+              = link_to "トップ", root_path
+            li
+              = link_to "新規登録", new_user_registration_path
+            li
+              = link_to "ログイン", new_user_session_path
+        .clear
+      .clear
+    = yield
+    footer
+      #footer_inner
+        p
+          | Copyright RailsCamp 2015 All Rights Reserved

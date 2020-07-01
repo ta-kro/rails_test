@@ -1,0 +1,13 @@
+#sidebar
+  h2
+    | ★PV数ランキング
+  - @ranking_articles.each do |article|
+    ul
+      li
+        = link_to article_path(article) do
+          = article.title
+          span
+            | (
+            = REDIS.zscore("articles/daily/#{Date.today.to_s}", article.id).to_i
+            | PV)
+.clear

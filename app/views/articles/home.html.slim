@@ -1,0 +1,16 @@
+#main
+  = image_tag "main-img.jpg"
+#article_wrap
+  #article_list
+    - @articles.each do |article|
+      div
+        h2
+          = link_to article.title, article_path(article)
+        p
+          = l article.created_at, format: :short
+        - if user_signed_in?
+          span
+            = link_to '編集', edit_article_path(article)
+          span 
+            = link_to '削除', article_path(article), method: :delete, data: { confirm: '削除してよろしいですか?' }
+  = render 'ranking_form'

@@ -1,0 +1,12 @@
+#title
+  div
+    p
+      = l @article.created_at, format: :short
+      |  / 書いた人:
+      = @article.user.email
+    h1
+      = @article.title
+#article_wrap
+  #content
+    = simple_format @article.content
+  = render 'ranking_form'
